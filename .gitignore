@@ -1,0 +1,17 @@
+# Maven
+target/
+
+# Firebase secret key — НИКОГДА не коммитить!
+*firebase-adminsdk*.json
+src/main/resources/*firebase*.json
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
