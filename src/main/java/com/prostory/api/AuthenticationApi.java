@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,5 +43,12 @@ public class AuthenticationApi {
     @PostMapping("/reset-password")
     public ResponseEntity<SimpleResponse> resetPassword(@RequestParam String token, @RequestBody @Valid ResetPasswordRequest request) {
         return ResponseEntity.ok(authenticationService.resetPassword(token, request.newPassword()));
+    }
+
+    @SneakyThrows
+    @PostMapping("/signInWithGoogle")
+    @Operation(summary = "Метод для авторизации через Google")
+    public AuthenticationResponse signUpWithGoogle(@RequestParam String token){
+        return authenticationService.authWithGoogle(token);
     }
 }

@@ -6,6 +6,7 @@ import com.prostory.dto.SignUpRequest;
 import com.prostory.dto.SimpleResponse;
 import jakarta.mail.MessagingException;
 import org.apache.coyote.BadRequestException;
+import com.google.firebase.auth.FirebaseAuthException;
 
 public interface AuthenticationService {
     AuthenticationResponse signUp(SignUpRequest request) throws BadRequestException;
@@ -15,4 +16,5 @@ public interface AuthenticationService {
     SimpleResponse forgotPassword(String email) throws MessagingException;
 
     SimpleResponse resetPassword(String token, String newPassword);
+    AuthenticationResponse authWithGoogle(String tokenId) throws FirebaseAuthException;
 }

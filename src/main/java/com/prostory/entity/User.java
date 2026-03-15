@@ -20,7 +20,6 @@ public class User {
     private Long id;
     private String userName;
     private String phoneNumber;
-    private String email;
     private String address;
 
     @OneToOne(cascade = ALL, orphanRemoval = true)

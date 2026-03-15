@@ -1,5 +1,8 @@
 package com.prostory.service.serviceImpl;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseToken;
 import com.prostory.configs.jwt.JwtService;
 import com.prostory.dto.AuthenticationResponse;
 import com.prostory.dto.SignInRequest;
@@ -61,7 +64,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = User.builder()
                 .userName(request.userName())
                 .phoneNumber(request.phoneNumber())
-                .email(request.email())
                 .userInfo(userInfo)
                 .build();
         userRepository.save(user);
@@ -148,4 +150,43 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .message("User password changed successfully!")
                 .build();
     }
+
+    @Override
+    public AuthenticationResponse authWithGoogle(String tokenId) throws FirebaseAuthException {
+        log.info("auth with google has been started");
+        FirebaseToken firebaseToken = FirebaseAuth.getInstance().verifyIdToken(tokenId);
+
+        if (!userInfoRepository.existsByEmail(firebaseToken.getEmail())) {
+            String[] names = firebaseToken.getName().split(" ", 2);
+
+            UserInfo userInfo = UserInfo.builder()
+                    .email(firebaseToken.getEmail())
+                    .password(passwordEncoder.encode(firebaseToken.getEmail()))
+                    .role(Role.USER)
+                    .build();
+
+            User newUser = User.builder()
+                    .userName(names[0])
+                    .userInfo(userInfo)
+                    .build();
+
+            userRepository.save(newUser);
+            log.info("New user via Google saved: {}", firebaseToken.getEmail());
+        }
+
+        UserInfo userInfo = userInfoRepository.findByEmail(firebaseToken.getEmail())
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("Not found user with email %s", firebaseToken.getEmail())
+                ));
+
+        String token = jwtService.generateToken(userInfo);
+        log.info("auth with google has been ended");
+
+        return AuthenticationResponse.builder()
+                .token(token)
+                .email(userInfo.getEmail())
+                .role(userInfo.getRole())
+                .build();
+    }
+
 }
