@@ -46,7 +46,7 @@ public class AuthenticationApi {
     }
 
     @SneakyThrows
-    @PostMapping("/signInWithGoogle")
+    @PostMapping("/signUpWithGoogle")
     @Operation(summary = "Метод для авторизации через Google")
     public AuthenticationResponse signUpWithGoogle(@RequestParam String token){
         return authenticationService.authWithGoogle(token);

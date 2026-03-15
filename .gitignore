@@ -1,7 +1,6 @@
 # Maven
 target/
 
-# Firebase secret key — НИКОГДА не коммитить!
 *firebase-adminsdk*.json
 src/main/resources/*firebase*.json
 

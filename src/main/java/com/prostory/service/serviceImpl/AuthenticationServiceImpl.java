@@ -29,6 +29,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import org.springframework.core.io.ClassPathResource;
+import jakarta.annotation.PostConstruct;
+import java.io.IOException;
 
 import java.util.UUID;
 
@@ -151,6 +157,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
     }
 
+    @PostConstruct
+    void init() throws IOException {
+        GoogleCredentials googleCredentials = GoogleCredentials
+                .fromStream(new ClassPathResource("prostory-4902f-firebase-adminsdk-fbsvc-82f9a15fb6.json")
+                        .getInputStream());
+        FirebaseOptions firebaseOptions = FirebaseOptions.builder()
+                .setCredentials(googleCredentials)
+                .build();
+        FirebaseApp.initializeApp(firebaseOptions);
+    }
+
     @Override
     public AuthenticationResponse authWithGoogle(String tokenId) throws FirebaseAuthException {
         log.info("auth with google has been started");
@@ -189,4 +206,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
     }
 
+    @PostConstruct
+    public void initSaveAdmin() {
+        if (!userInfoRepository.existsByEmail("admin@gmail.com")) {
+            UserInfo adminInfo = UserInfo.builder()
+                    .email("admin@gmail.com")
+                    .password(passwordEncoder.encode("Admin123"))
+                    .role(Role.ADMIN)
+                    .build();
+
+            User admin = User.builder()
+                    .userName("Admin")
+                    .phoneNumber("+996558870024")
+                    .userInfo(adminInfo)
+                    .build();
+
+            userRepository.save(admin);
+            log.info("Admin successfully created and saved");
+        }
+    }
 }
