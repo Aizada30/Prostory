@@ -1,10 +1,7 @@
 package com.prostory.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -12,10 +9,12 @@ import lombok.Setter;
 @Table(name = "categories")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Category {
     @Id
     @SequenceGenerator(name = "category_gen", sequenceName = "category_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_gen")
     private Long id;
+    @Column(nullable = false, unique = true)
     private String name;
 }
