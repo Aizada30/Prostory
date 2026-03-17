@@ -17,11 +17,11 @@ public class PhoneNumberValidation implements ConstraintValidator<PhoneNumberVal
     @Override
     public boolean isValid(String s, ConstraintValidatorContext context) {
 
+        if (s == null) return false;
         if (s.length() != 13 || !s.startsWith("+996")) {
             return false;
         }
-
-        String operatorPrefix = s.substring(4, 7);
-        return VALID_OPERATOR_PREFIXES.stream().anyMatch(operatorPrefix::contains);
+        String operatorPrefix = s.substring(4, 6);
+        return VALID_OPERATOR_PREFIXES.stream().anyMatch(operatorPrefix::equals);
     }
 }

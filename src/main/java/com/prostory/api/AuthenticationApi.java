@@ -15,12 +15,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 @Tag(name = "Authentication API")
+@Validated
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class AuthenticationApi {
     private final AuthenticationService authenticationService;

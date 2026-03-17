@@ -124,9 +124,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 });
         String token = UUID.randomUUID().toString();
         userInfo.setResetPasswordToken(token);
+        userInfoRepository.save(userInfo);
 
         String subject = "Password Reset Request";
-        String resetPasswordLink = "http://localhost:8080/reset-password?token=" + token;
+        String resetPasswordLink = "http://localhost:8080/swagger-ui/index.html#/Authentication%20API/resetPassword";
 
         Context context = new Context();
         context.setVariable("title", "Password Reset");
@@ -150,6 +151,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         userInfo.setPassword(passwordEncoder.encode(newPassword));
         userInfo.setResetPasswordToken(null);
+        userInfoRepository.save(userInfo);
         log.info("User password changed successfully!");
         return SimpleResponse.builder()
                 .httpStatus(HttpStatus.OK)
