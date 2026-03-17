@@ -3,7 +3,9 @@ package com.prostory.api;
 
 import com.prostory.dto.request.CategoryRequest;
 import com.prostory.dto.response.CategoryResponse;
+import com.prostory.dto.response.ProductResponse;
 import com.prostory.service.CategoryService;
+import com.prostory.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryApi {
     private final CategoryService categoryService;
+    private final ProductService productService;
 
     @PostMapping("/createCategory/{id}")
     public ResponseEntity<CategoryResponse> create(@Valid @RequestBody CategoryRequest request) {
@@ -43,5 +46,10 @@ public class CategoryApi {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         categoryService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/products")
+    public ResponseEntity<List<ProductResponse>> getProductsByCategory(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.getProductsByCategory(id));
     }
 }
