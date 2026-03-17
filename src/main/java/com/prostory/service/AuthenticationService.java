@@ -1,9 +1,9 @@
 package com.prostory.service;
 
-import com.prostory.dto.AuthenticationResponse;
-import com.prostory.dto.SignInRequest;
-import com.prostory.dto.SignUpRequest;
-import com.prostory.dto.SimpleResponse;
+import com.prostory.dto.response.AuthenticationResponse;
+import com.prostory.dto.request.SignInRequest;
+import com.prostory.dto.request.SignUpRequest;
+import com.prostory.dto.response.SimpleResponse;
 import jakarta.mail.MessagingException;
 import org.apache.coyote.BadRequestException;
 import com.google.firebase.auth.FirebaseAuthException;

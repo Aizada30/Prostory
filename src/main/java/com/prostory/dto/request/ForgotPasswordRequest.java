@@ -1,4 +1,4 @@
-package com.prostory.dto;
+package com.prostory.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

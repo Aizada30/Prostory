@@ -1,6 +1,6 @@
 package com.prostory.service;
 
-import com.prostory.dto.UserChosenOneResponse;
+import com.prostory.dto.response.UserChosenOneResponse;
 
 import java.util.List;
 

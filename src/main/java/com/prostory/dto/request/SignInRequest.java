@@ -1,4 +1,4 @@
-package com.prostory.dto;
+package com.prostory.dto.request;
 
 import com.prostory.validation.EmailValid;
 import com.prostory.validation.PasswordValid;

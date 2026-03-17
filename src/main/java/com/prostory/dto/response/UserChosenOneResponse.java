@@ -1,4 +1,4 @@
-package com.prostory.dto;
+package com.prostory.dto.response;
 
 import lombok.*;
 

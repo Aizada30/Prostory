@@ -1,6 +1,6 @@
 package com.prostory.service.serviceImpl;
 
-import com.prostory.dto.UserChosenOneResponse;
+import com.prostory.dto.response.UserChosenOneResponse;
 import com.prostory.entity.User;
 import com.prostory.exception.exceptions.NotFoundException;
 import com.prostory.repository.UserCustomRepository;

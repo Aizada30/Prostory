@@ -1,6 +1,11 @@
 package com.prostory.api;
 
-import com.prostory.dto.*;
+import com.prostory.dto.request.ForgotPasswordRequest;
+import com.prostory.dto.request.ResetPasswordRequest;
+import com.prostory.dto.request.SignInRequest;
+import com.prostory.dto.request.SignUpRequest;
+import com.prostory.dto.response.AuthenticationResponse;
+import com.prostory.dto.response.SimpleResponse;
 import com.prostory.service.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
