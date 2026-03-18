@@ -45,7 +45,7 @@ jobs:
           root: .
           paths:
             - << pipeline.parameters.docker-container >>.tar.gz
-            - docker compose.yml
+            - docker-compose.yml
   transfer-and-run:
     docker:
       - image: circleci/node:14
