@@ -1,10 +1,7 @@
 # Stage 1: Build
-FROM amazoncorretto:17 AS build
+FROM maven:3.9.9-amazoncorretto-17 AS build
 
 WORKDIR /app
-
-# Установим Maven
-RUN yum install -y maven && yum clean all
 
 # Копируем весь проект
 COPY . .
@@ -20,8 +17,8 @@ WORKDIR /app
 # Копируем собранный jar
 COPY --from=build /app/target/Prostory-0.0.1-SNAPSHOT.jar .
 
-# Запуск приложения
-CMD ["java", "-jar", "Prostory-0.0.1-SNAPSHOT.jar"]
-
 # Порт приложения
 EXPOSE 2026
+
+# Запуск приложения
+CMD ["java", "-jar", "Prostory-0.0.1-SNAPSHOT.jar"]
