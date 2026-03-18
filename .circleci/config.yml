@@ -62,8 +62,8 @@ jobs:
           command: |
             ssh -o "StrictHostKeyChecking=no" -i ./privateKey.pem ubuntu@$HOST '
             if [[ -e ./docker-compose.yml ]]; then
-                if [[ $(sudo docker-compose -f ./docker-compose.yml ps -q) ]]; then
-                    sudo docker-compose down --rmi="all"
+                if [[ $(sudo docker compose -f ./docker-compose.yml ps -q) ]]; then
+                    sudo docker compose down --rmi="all"
                 fi
                 sudo rm docker-compose.yml
             fi'
@@ -77,7 +77,7 @@ jobs:
             ssh -o "StrictHostKeyChecking=no" -i ./privateKey.pem ubuntu@$HOST '
             sudo gunzip -c ./<< pipeline.parameters.docker-container >>.tar.gz | sudo docker load
             sudo rm ./<< pipeline.parameters.docker-container >>.tar.gz
-            sudo docker-compose up -d
+            sudo docker compose up -d
             '
 
 workflows:
