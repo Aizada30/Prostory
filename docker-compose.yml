@@ -9,7 +9,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: main
       SERVER_PORT: 2026
-      POSTGRES_DB: jdbc:postgresql://database:5432/postgres
+      POSTGRES_DB: prostory
       POSTGRES_USER: prostoryuser
       POSTGRES_PASSWORD: prostorypass
   database:
@@ -21,6 +21,7 @@ services:
     environment:
       POSTGRES_USER: prostoryuser
       POSTGRES_PASSWORD: prostorypass
+      POSTGRES_DB: prostory
     volumes:
       - db_data:/var/lib/postgresql/data
 volumes:
