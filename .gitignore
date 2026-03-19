@@ -1,9 +1,6 @@
 # Maven
 target/
 
-*firebase-adminsdk*.json
-src/main/resources/*firebase*.json
-
 # IntelliJ IDEA
 .idea/
 *.iml
