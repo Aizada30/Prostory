@@ -25,4 +25,6 @@ public class User {
     @OneToOne(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "user_info_id")
     private UserInfo userInfo;
+    @OneToOne(cascade = ALL, mappedBy = "user", orphanRemoval = true)
+    private Favorite favorite;
 }
