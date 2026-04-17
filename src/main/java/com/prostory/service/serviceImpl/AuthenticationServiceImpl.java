@@ -127,7 +127,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         userInfoRepository.save(userInfo);
 
         String subject = "Password Reset Request";
-        String resetPasswordLink = "http://63.179.249.70/swagger-ui/index.html#/Authentication%20API/resetPassword";
+        String resetPasswordLink = "uthentication%20API/resetPassword";
 
         Context context = new Context();
         context.setVariable("title", "Password Reset");
